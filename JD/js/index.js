@@ -6,7 +6,6 @@ let box = document.querySelector('.head-box')
 let sp = document.querySelector('.sp')
 let ulAll = document.querySelectorAll('.head-ul li')
 let div = document.querySelector('.head-div')
-console.log(div);
 let str = ''
 ulAll.forEach(function(li) {
     li.onclick = function() {
@@ -65,3 +64,46 @@ dj.onmouseout = function() {
     dj.style.background = '#e3e4e5'
     da.style.display = 'none'
 }
+
+
+// 限时秒杀
+class Fn {
+
+
+    constructor() {
+        this.tiem()
+    }
+    tiem() {
+        //  获取节点
+        let s1 = this.$('.data-s1')
+        let s2 = this.$('.data-s2')
+        let s3 = this.$('.data-s3')
+            // 运动函数
+        setTimeout(function() {
+            // 创建时间对象
+            let date = new Date()
+                // 自定义结束时间
+            let newDate = new Date('2022/10/1')
+                // 获取时间差
+            let cha = newDate - date
+                // 进行时间转换
+            let h = parseInt(cha / 1000 / 60 / 60 / 24)
+            let m = parseInt(cha / 1000 / 60 / 60 % 24)
+            let f = parseInt((cha / 1000 / 60) % 60)
+            if (h < 10) h = '0' + h
+            if (m < 10) m = '0' + m
+            if (f < 10) f = '0' + f
+            s1.innerHTML = h
+            s2.innerHTML = m
+            s3.innerHTML = f
+
+        }, 1000)
+    }
+
+    // 封装一个获取节点的方法
+    $(ele) {
+        return document.querySelector(ele) || document.querySelectorAll(ele)
+    }
+}
+
+let p = new Fn

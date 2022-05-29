@@ -390,6 +390,7 @@
         height: 100%;
         overflow: hidden;
         margin: 0 auto;
+        margin-bottom: 30px;
     }
     
     .main-L {
@@ -437,7 +438,7 @@
         float: right;
         width: 190px;
         height: 480px;
-        background-color: rgb(160, 155, 155);
+        background-color: #fff;
     }
     
     .main-img {
@@ -495,7 +496,6 @@
         width: 100%;
         height: 102px;
         float: left;
-        background-color: pink;
         overflow: hidden;
     }
     
@@ -536,7 +536,6 @@
         width: 190px;
         height: 130px;
         float: left;
-        background-color: red;
     }
     
     .main-h5 {
@@ -558,4 +557,178 @@
         margin-left: 50px;
         color: #9f999d;
         font-size: 12px;
+    }
+    
+    .main-ull {
+        margin: 0 15px;
+        height: 88px;
+    }
+    
+    .main-list1 {
+        color: #666;
+        font-size: 12px;
+    }
+    
+    .main-list1 span {
+        display: inline-block;
+        position: relative;
+        font-size: 12px;
+        height: 16px;
+        width: 35px;
+        line-height: 16px;
+        text-align: center;
+        vertical-align: 0;
+        color: #e1251b;
+        background-color: rgba(225, 37, 27, .08);
+        margin-right: 6px;
+    }
+    
+    .main-item {
+        max-width: 160px;
+        height: 16px;
+        line-height: 16px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        color: #999;
+        margin-bottom: 6px;
+    }
+    /* 限时秒杀部分 */
+    
+    .item-center {
+        width: 990px;
+        height: 260px;
+        background-color: pink;
+        margin: 0 auto;
+    }
+    /* 左侧显示秒杀 */
+    
+    .item-L {
+        width: 190px;
+        height: 260px;
+        float: left;
+        background-image: url(../image/限时秒杀.png);
+    }
+    
+    .item-text {
+        width: 100%;
+        text-align: center;
+        font-size: 30px;
+        font-weight: 700;
+        padding-top: 31px;
+        color: #fff;
+    }
+    
+    .item-desc {
+        margin-top: 90px;
+        font-size: 14px;
+        text-align: center;
+        color: #fff;
+    }
+    
+    .item-text strong {
+        font-size: 18px;
+    }
+    
+    .miaosha {
+        width: 130px;
+        height: 30px;
+        padding-top: 10px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    
+    .miaosha ul {
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center
+    }
+    
+    .miaosha ul li {
+        text-align: center;
+        float: left;
+    }
+    
+    .ul-li {
+        width: 10px;
+        text-align: center;
+        font-weight: 700;
+        color: #fff;
+    }
+    
+    .miaosha-span1 {
+        font-weight: 700;
+        height: 25px;
+        display: inline-block;
+        line-height: 25px;
+        text-align: center;
+        background-color: #2f3430;
+        color: white;
+        font-size: 16px;
+    }
+    
+    .item-banner {
+        width: 800px;
+        height: 260px;
+        background-color: rgb(82, 43, 43);
+        float: left;
+    }
+    
+    .banner {
+        width: 800px;
+        height: 260px;
+    }
+    
+    .data-jd {
+        width: 100%;
+        height: 100%;
+        background-image: url(../image/京东秒杀背景.png);
+        background-position-x: center;
+        background-repeat: no-repeat;
+        background: orange;
+        margin-top: 10px;
+        float: left;
+    }
+    
+    .data-jd-center {
+        margin: 0 auto;
+        width: 990px;
+    }
+    
+    .data-bac {
+        height: 90px;
+        background-image: url(../image/京东秒杀文字.png);
+        background-position-x: center;
+        background-position-y: 10px;
+        background-repeat: no-repeat;
+    }
+    
+    .main-ul {
+        width: 100%;
+        background-color: red;
+        float: left;
+    }
+    
+    .main-ul li {
+        float: left;
+        margin-left: 10px;
+        margin-bottom: 10px;
+        height: 400px;
+        background: #fff;
+    }
+    
+    .li-img {
+        width: 230px;
+        height: 200px;
+        padding: 20px 30px 0;
+    }
+    
+    .li-img img {
+        width: 100%;
+        height: 100%;
+    }
+    
+    .main-ul li h4 {
+        margin-top: 70px;
     }
