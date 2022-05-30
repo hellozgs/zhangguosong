@@ -68,39 +68,130 @@ dj.onmouseout = function() {
 
 // 限时秒杀
 class Fn {
-
-
     constructor() {
-        this.tiem()
+            this.tiem()
+            this.git()
+            this.on()
+                // 默认页码
+            this.currentPage = 1;
+            // 使用锁
+            this.lock = false;
+        }
+        // 事件
+    on() {
+        this.$('.main-ul').addEventListener('click', this.ul)
+        window.addEventListener('scroll', this.lazy)
     }
     tiem() {
-        //  获取节点
-        let s1 = this.$('.data-s1')
-        let s2 = this.$('.data-s2')
-        let s3 = this.$('.data-s3')
-            // 运动函数
-        setTimeout(function() {
-            // 创建时间对象
-            let date = new Date()
-                // 自定义结束时间
-            let newDate = new Date('2022/10/1')
-                // 获取时间差
-            let cha = newDate - date
-                // 进行时间转换
-            let h = parseInt(cha / 1000 / 60 / 60 / 24)
-            let m = parseInt(cha / 1000 / 60 / 60 % 24)
-            let f = parseInt((cha / 1000 / 60) % 60)
-            if (h < 10) h = '0' + h
-            if (m < 10) m = '0' + m
-            if (f < 10) f = '0' + f
-            s1.innerHTML = h
-            s2.innerHTML = m
-            s3.innerHTML = f
+            //  获取节点
+            var s1 = this.$('.data-s1')
+            var s2 = this.$('.data-s2')
+            var s3 = this.$('.data-s3')
+                // 运动函数
+            var res = setInterval(function() {
+                // 创建时间对象
+                let date = new Date()
+                    // 自定义结束时间
+                let newDate = new Date('2022/10/1')
+                    // 获取时间差
+                let cha = newDate - date
+                    // 进行时间转换
+                let h = parseInt(cha / 1000 / 60 / 60 / 24)
+                let m = parseInt(cha / 1000 / 60 / 60 % 24)
+                let f = parseInt((cha / 1000 / 60) % 60)
+                if (h < 10) h = '0' + h
+                if (m < 10) m = '0' + m
+                if (f < 10) f = '0' + f
+                s1.innerHTML = h
+                s2.innerHTML = m
+                s3.innerHTML = f
+                if (cha < 0) {
+                    clearInterval(res)
+                }
+            }, 1000)
+        }
+        // 发送axios请求进行对商品页面的渲染
+    git(page = 1) {
+            axios.get('http://localhost:8888/goods/list?current=' + page)
+                .then((res) => {
+                    let { data, status, } = res
+                    if (status == 200 && data.code == 1) {
+                        let html = ''
+                        data.list.forEach((eve) => {
+                                html += `
+                            <li class='bttt'data-id="${eve.goods_id}">
+                            <div class="li-img">
+                                <img src="${eve.img_big_logo}" alt="">
+                            </div>
+                            <h4>${eve.title}</h4>
+                            <p>
+                                <img src="../image/自营.png" alt="">
+                            </p>
+                            <div class="main-top">
+                                <span>￥${eve.price}</span>
+                                <button class='bttt'>立即抢购</button>
+                            </div>
+                        </li>
+                            `
+                            })
+                            // 进行页面的的追加
+                        this.$('.main-ul').innerHTML += html
+                    }
+                })
+        }
+        //点击立即抢购 使用事件委托
+    ul = (eve) => {
+            let tar = eve.target
+                // 判断点击的标签
+            if (tar.nodeName != 'BUTTON' || tar.className != 'bttt') return
+                // 判断用户是否登录,如果没有登录那么就跳转到登录页面
+            let token = localStorage.getItem('token')
+            if (!token) location.assign('../html/login.html?ReturnUrl=../html/index.html')
+                // 如果登录了就跳转到详情页
+                // 获取商品id
+            let goodsId = eve.target.parentNode.parentNode.dataset.id;
+            localStorage.setItem("sp", goodsId)
+                // this.addCart(goodsId)
+                //     location.href = '../html/detail.html'
+                //     let goodsId = eve.target.parentNode.parentNode.dataset.id;
+                //     this.addCart(goodsId)
+        }
+        //     // 获取商品列表
+        // addCart = gid => {
+        //     console.log(gid);
+        //     axios.get('http://localhost:8888/goods/item', {
+        //             params: {
+        //                 id: gid
+        //             }
+        //         })
+        //         .then((res) => {
+        //             let { data, status } = res
+        //             console.log(data);
+        //         })
+        // }
 
-        }, 1000)
+
+    // 懒加载
+    lazy = () => {
+        // 需要滚动条高度,可视区高度,实际内容高度
+        let top = document.documentElement.scrollTop;
+        let cliH = document.documentElement.clientHeight;
+        let conH = this.$('.data-jd').offsetHeight;
+        // 但滚动条高度+可视区的高度> 实际内容高度时,就加载新数据
+        if (top + cliH > (conH + 500)) {
+            // 一瞬间就满足条件,会不停的触发数据加载,使用节流和防抖
+
+            // 如果是锁着的,就结束代码执行
+            if (this.lock) return;
+            this.lock = true;
+            // 指定时间开锁,才能进行下次数据清除
+            setTimeout(() => {
+                    this.lock = false;
+                }, 1000)
+                // console.log(1111);
+            this.git(++this.currentPage)
+        }
     }
-
-    // 封装一个获取节点的方法
     $(ele) {
         return document.querySelector(ele) || document.querySelectorAll(ele)
     }

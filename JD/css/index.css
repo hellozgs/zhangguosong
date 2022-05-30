@@ -598,7 +598,6 @@
     .item-center {
         width: 990px;
         height: 260px;
-        background-color: pink;
         margin: 0 auto;
     }
     /* 左侧显示秒杀 */
@@ -671,13 +670,15 @@
     .item-banner {
         width: 800px;
         height: 260px;
-        background-color: rgb(82, 43, 43);
         float: left;
+        background-image: url(../image/京东秒杀背景.png);
+        background-position: 100%;
     }
     
     .banner {
         width: 800px;
         height: 260px;
+        overflow: hidden;
     }
     
     .data-jd {
@@ -686,14 +687,13 @@
         background-image: url(../image/京东秒杀背景.png);
         background-position-x: center;
         background-repeat: no-repeat;
-        background: orange;
         margin-top: 10px;
         float: left;
     }
     
     .data-jd-center {
         margin: 0 auto;
-        width: 990px;
+        width: 1213px;
     }
     
     .data-bac {
@@ -706,7 +706,6 @@
     
     .main-ul {
         width: 100%;
-        background-color: red;
         float: left;
     }
     
@@ -730,5 +729,118 @@
     }
     
     .main-ul li h4 {
-        margin-top: 70px;
+        width: 230px;
+        color: #333;
+        font-size: 14px;
+        margin: 20px -10px 9px;
+        font-weight: 400;
+        text-align: left;
+        line-height: 20px;
+        height: 20px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        text-align: center;
+        margin-top: 30px;
+        margin-left: 20px;
+    }
+    
+    .main-ul li p {
+        margin: 20px -10px;
+        font-size: 14px;
+        height: 21px;
+        line-height: 21px;
+        color: #e01222;
+        text-align: left;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        line-height: 21px;
+    }
+    
+    .main-ul li p img {
+        margin-left: 20px;
+        height: 100%;
+        vertical-align: middle;
+    }
+    
+    .main-ul li p span {
+        display: inline-block;
+        line-height: 21px;
+    }
+    
+    .main-top {
+        width: 290px;
+        height: 70px;
+    }
+    
+    .main-top span {
+        padding: 30px 0 0 30px;
+        display: block;
+        line-height: 1;
+        padding-left: 20px;
+        display: block;
+        font-size: 24px;
+        color: #e01222;
+        font-family: arial;
+        margin-right: 2px;
+        line-height: 1;
+        display: inline-block;
+        min-width: 50px;
+        float: left;
+    }
+    
+    .main-top button {
+        color: #fff;
+        height: 40px;
+        line-height: 40px;
+        font-size: 16px;
+        display: block;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto 0;
+        width: 80px;
+        text-align: center;
+        background: #df0021;
+        float: right;
+        margin-top: 30px;
+    }
+    /* 京东底部 */
+    
+    .floot {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    .floot-center {
+        width: 990px;
+        height: 86px;
+        margin: 0 auto;
+        margin-top: 20px;
+        text-align: center;
+        overflow: hidden;
+    }
+    
+    .floot-ul {
+        width: 990px;
+        height: 18px;
+        display: flex;
+        justify-content: space-evenly;
+        color: #666666;
+    }
+    
+    .floot-ul li {
+        height: 18px;
+        line-height: 18px;
+        margin: 0 8px;
+        font-size: 12px;
+    }
+    
+    .floot-top {
+        height: 40px;
+        line-height: 40px;
+        font-size: 12px;
+        color: #666666;
     }
