@@ -141,35 +141,20 @@ class Fn {
         }
         //点击立即抢购 使用事件委托
     ul = (eve) => {
-            let tar = eve.target
-                // 判断点击的标签
-            if (tar.nodeName != 'BUTTON' || tar.className != 'bttt') return
-                // 判断用户是否登录,如果没有登录那么就跳转到登录页面
-            let token = localStorage.getItem('token')
-            if (!token) location.assign('../html/login.html?ReturnUrl=../html/index.html')
-                // 如果登录了就跳转到详情页
-                // 获取商品id
-            let goodsId = eve.target.parentNode.parentNode.dataset.id;
-            localStorage.setItem("sp", goodsId)
-                // this.addCart(goodsId)
-                //     location.href = '../html/detail.html'
-                //     let goodsId = eve.target.parentNode.parentNode.dataset.id;
-                //     this.addCart(goodsId)
-        }
-        //     // 获取商品列表
-        // addCart = gid => {
-        //     console.log(gid);
-        //     axios.get('http://localhost:8888/goods/item', {
-        //             params: {
-        //                 id: gid
-        //             }
-        //         })
-        //         .then((res) => {
-        //             let { data, status } = res
-        //             console.log(data);
-        //         })
-        // }
+        let tar = eve.target
+            // 判断点击的标签
+        if (tar.nodeName != 'BUTTON' || tar.className != 'bttt') return
+            // 判断用户是否登录,如果没有登录那么就跳转到登录页面
+        let token = localStorage.getItem('token')
+        if (!token) location.assign('../html/login.html?ReturnUrl=../html/index.html')
+            // 如果登录了就跳转到详情页
+        if (token) location.href = '../html/detail.html'
+            // 获取商品id
+        let goodsId = eve.target.parentNode.parentNode.dataset.id;
+        // 本地存储商品id
+        localStorage.setItem("sp", goodsId)
 
+    }
 
     // 懒加载
     lazy = () => {
