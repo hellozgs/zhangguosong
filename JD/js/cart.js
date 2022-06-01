@@ -4,27 +4,62 @@ class Fn {
             this.get()
             this.$('.cart-list').addEventListener('click', this.remove)
 
+            this.$('.cart-th input').addEventListener('click', this.check);
+
         }
         // 删除
-    remove(eve) {
-        let target = eve.target;
-        // console.log(target);
-        // 判断当前点击的是删除的a标签
-        if (target.nodeName == 'A' && target.classList.contains('del1')) this.del(target)
+    remove = (eve) => {
+            let target = eve.target;
+            // 判断当前点击的是删除的a标签
+            if (target.nodeName == 'A' && target.classList.contains('del1')) {
+                this.del(target)
+            }
+        }
+        // 全选
+    check = (eve) => {
+        let alls = eve.target.checked;
+        console.log(alls);
+        this.All(alls)
+    }
+    All = (e) => {
+        let input = document.querySelectorAll('.good-checkbox')
+
+        input.forEach(i => {
+            i.checked = e
+        })
+    }
+    del(eve) {
+        //  用户id
+        let uId = localStorage.getItem('user_id');
+        // 商品id
+        let ul = eve.parentNode.parentNode.parentNode
+        let gid = ul.dataset.id
+        const AUTH_TOKEN = localStorage.getItem('token')
+        axios.defaults.headers.common['authorization'] = AUTH_TOKEN;
+        axios.get('http://localhost:8888/cart/remove', {
+            params: {
+                id: uId,
+                goodsId: gid
+            }
+        }).then(res => {
+            // 删除本身
+            ul.remove();
+
+        })
     }
     async get() {
-            const AUTH_TOKEN = localStorage.getItem('token')
-            axios.defaults.headers.common['authorization'] = AUTH_TOKEN;
-            let res = await axios.get('http://localhost:8888/cart/list', {
-                params: {
-                    id: localStorage.getItem('user_id')
-                }
-            })
-            let { data, status } = res
-            let html = ''
-            data.cart.forEach(function(eve) {
-                html += `
-         <ul class="goods-list yui3-g" data-id='${eve.doods_id}'>
+        const AUTH_TOKEN = localStorage.getItem('token')
+        axios.defaults.headers.common['authorization'] = AUTH_TOKEN;
+        let res = await axios.get('http://localhost:8888/cart/list', {
+            params: {
+                id: localStorage.getItem('user_id')
+            }
+        })
+        let { data, status } = res
+        let html = ''
+        data.cart.forEach(function(eve) {
+            html += `
+         <ul class="goods-list yui3-g" data-id='${eve.goods_id}'>
                                     <li class="yui3-u-3-8 pr">
                                         <input type="checkbox" class="good-checkbox">
                                         <div class="good-item">
@@ -60,24 +95,16 @@ class Fn {
                                     </li>
                                     <li class="yui3-u-1-8">
                                         <div class="del1">
-                                            <a href="javascript:;">删除</a>
+                                            <a href="javascript:;"class="del1">删除</a>
                                         </div>
                                         <div>移到我的关注</div>
                                     </li>
                                 </ul>
          `
-            })
-            this.$(".cart-list").innerHTML = html
-                //   单选按钮的实现
-        }
-        // 单选按钮的实现
-    del = () => {
-        // 给单选按钮添加点击事件
-        this.$('.good-checkbox').forEach(eve => {
-
-            console.log(123);
         })
+        this.$(".cart-list").innerHTML = html
     }
+
 
     // 设置加减效果
     // 封装一个获取节点的方法
